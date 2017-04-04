@@ -18,7 +18,7 @@ line; }; PS1='\${debian_chroot:+(\$debian_chroot)}\n\$(info)\n\$ '
 # If this is an xterm set the title to user@host:dir
 case "\$TERM" in
 
-    xterm*|rxvt*) PS1="\[\e]0;\${debian_chroot:+(\$debian_chroot)} \${faces[\$((RANDOM % \${#faces[@]}))]} \w\a\]\$PS1";;
+    xterm*|rxvt*) PS1="\[\e]0;\${debian_chroot:+(\$debian_chroot)} \${faces[\$((RANDOM % \${facesN}))]} \w\a\]\$PS1";;
 
 esac
 #------------------------------------------------------------------------------------------------------------------------
