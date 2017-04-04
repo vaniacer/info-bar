@@ -2,10 +2,10 @@
 
 cat >> ~/.bashrc <<- EOF
 #------------------------------------------------| Info bar |-------------------------------------------------------------
-faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º)
+faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=\${#faces[@]}
 
 function line { printf "\e[32m"; printf %.s- \$(seq \$COLUMNS); printf "\e[0m"; }
-function face { printf "\e[33m\${faces[\$((RANDOM   %   \${#faces[@]}))]}\e[0m"; }
+function face { printf "\e[33m\${faces[\$((RANDOM   %   \${facesN}))]}\e[0m";    }
 function info { D=\$(date +'%a %d %b %T'); S=\$[\$COLUMNS-\${#PWD}-32]; [ \$S -lt 0 ] && S=0
 						#-------+----------------------+------+--------------+-------+
 						#  O_o  |   Working directory  |Spaces|  Date & time |  o_O  |
@@ -17,7 +17,7 @@ function info { D=\$(date +'%a %d %b %T'); S=\$[\$COLUMNS-\${#PWD}-32]; [ \$S -l
 case "\$TERM" in
 
     xterm*|rxvt*) PS1="\[\e]0;\${debian_chroot:+(\$debian_chroot)} \${faces[\$((RANDOM % \${#faces[@]}))]} \w\a\]\$PS1";;
-               *) ;;
+
 esac
 #------------------------------------------------------------------------------------------------------------------------
 EOF
