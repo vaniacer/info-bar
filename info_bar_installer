@@ -4,24 +4,24 @@ case ${1} in '-remove' | '-r') sed -i '/[oOº]_[oOº]/d' ~/.bashrc; exit 0;; esa
 
 cat >> ~/.bashrc << EOF
 
-#------------------------------------------------| Info bar |---------------------------------------------------------------+ o_o
-faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=\${#faces[@]}                                                         # | o_º
-                                                                                                                          # | º_O
-function line { printf "\e[32m"; printf %.s- \$(seq \$COLUMNS); printf "\e[0m"; }                                         # | O_o
-function face { printf "\e[33m\${faces[\$((RANDOM     %    \${facesN}))]}\e[0m"; }                                        # | º_º
-function info { D=\$(date +'%a %d %b %T'); S=\$[\$COLUMNS-\${#PWD}-32]; [ \$S -lt 0 ] && S=                               # | o_º
-                                                                                                                          # | º_O
-        #-------+----------------------+------+--------------+-------+                                                      | o_o
-        #  O_o  |   Working directory  |Spaces|  Date & time |  o_O  |                                                      | o_O
-line    #-------+----------------------+------+--------------+-------+                                                      | O_O
-printf " \$(face) \e[1m\e[94m\${PWD}\e[0m %\${S}s \e[2m\${D}\e[0m \$(face) \n"                                            # | O_o
-line; }; PS1='\${debian_chroot:+(\$debian_chroot)}\n\$(info)\n\$ '                                                        # | º_O
-                                                                                                                          # | o_º
-# If this is an xterm set the title to user@host:dir                                                                      # | o_O
-case "\$TERM" in                                                                                                          # | O_o
-                                                                                                                          # | º_º
-    xterm*|rxvt*) PS1="\[\e]0;\${debian_chroot:+(\$debian_chroot)} \${faces[\$((RANDOM % \${#faces[@]}))]} \w\a\]\$PS1";; # | O_º
-                                                                                                                          # | o_o
-esac                                                                                                                      # | o_O
-#---------------------------------------------------------------------------------------------------------------------------+ º_O
+#------------------------------------------------| Info bar |-----------------------------------------------------------------+ o_o
+faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=\${#faces[@]}															# | o_º
+																															# | º_O
+function line { printf "\e[32m"; printf %.s- \$(seq \$COLUMNS); printf "\e[0m"; }											# | O_o
+function face { printf "\e[33m\${faces[\$((RANDOM     %    \${facesN}))]}\e[0m"; }											# | º_º
+function info { D=\$(date +'%a %d %b %T'); T=" O_o  $D  o_O "; S=\$[$COLUMNS-\${#PWD}-\${#T}]; [ \$S -lt 0 ] && S=0			# | o_º
+																															# | º_O
+        #-------+----------------------+------+--------------+-------+                                                        | o_o
+        #  O_o  |   Working directory  |Spaces|  Date & time |  o_O  |                                                        | o_O
+line    #-------+----------------------+------+--------------+-------+                                                        | O_O
+printf " \$(face) \e[1m\e[94m\${PWD}\e[0m %\${S}s \e[2m\${D}\e[0m \$(face) \n"												# | O_o
+line; }; PS1='\${debian_chroot:+(\$debian_chroot)}\n\$(info)\n\$ '															# | º_O
+																															# | o_º
+# If this is an xterm set the title to user@host:dir																		# | o_O
+case "\$TERM" in																											# | O_o
+                                                                                                                      	    # | º_º
+    xterm*|rxvt*) PS1="\[\e]0;\${debian_chroot:+(\$debian_chroot)} \${faces[\$((RANDOM % \${#faces[@]}))]} \w\a\]\$PS1";;	# | O_º
+																															# | o_o
+esac																														# | o_O
+#-----------------------------------------------------------------------------------------------------------------------------+ º_O
 EOF
