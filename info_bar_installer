@@ -2,7 +2,7 @@
 
 case ${1} in '-remove' | '-r') sed -i '/[oOº]_[oOº]/d' ~/.bashrc; exit 0;; esac
 
-cat >> ~/.bashrc <<< '
+sed -e "s|Z|'|g" <<< '
 
 #---------------------------------------------{ Info bar }------------------------------------------------+ o_o
 faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]}                                        # | o_º
@@ -23,7 +23,7 @@ function info {                                                                 
     line                                                                                                # | º_O
 }                                                                                                       # | O_o
                                                                                                         # | o_o
-PS1="${debian_chroot:+($debian_chroot)}\n$(info)\n$ "                                                   # | º_O
+PS1=Z${debian_chroot:+($debian_chroot)}\n$(info)\nZ                                                     # | º_O
                                                                                                         # | o_º
 case "$TERM" in xterm*|rxvt*)                                                                           # | O_o
                                                                                                         # | º_º
@@ -31,4 +31,4 @@ case "$TERM" in xterm*|rxvt*)                                                   
                                                                                                         # | o_o
 esac                                                                                                    # | o_O
 #---------------------------------------------------------------------------------------------------------+ º_O
-'
+' >> ~/.bashrc
