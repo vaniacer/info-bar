@@ -23,7 +23,7 @@ function info {                                                                 
     line                                                                                                # | º_O
 }                                                                                                       # | O_o
                                                                                                         # | o_o
-PS1=Z${debian_chroot:+($debian_chroot)}\n$(info)\nZ                                                     # | º_O
+PS1=Z${debian_chroot:+($debian_chroot)}\n$(info)\n$ Z                                                   # | º_O
                                                                                                         # | o_º
 case "$TERM" in xterm*|rxvt*)                                                                           # | O_o
                                                                                                         # | º_º
