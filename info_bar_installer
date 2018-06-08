@@ -11,7 +11,7 @@ function line { printf "\e[32m"; printf %.s- $(seq $COLUMNS); printf "\e[0m"; } 
 function face { printf "\e[33m${faces[$((RANDOM     %    ${facesN}))]}\e[0m"; }                         # | º_º
 function info {                                                                                         # | o_º
                                                                                                         # | o_º
-    D=$(date +"%a %d %b %T")                                                                            # | O_o
+    D=`printf "%(%a %d %b %T)T"`                                                                        # | O_o
     T=" O_o  $D  o_O "                                                                                  # | o_o
     S=$[$COLUMNS-${#PWD}-${#T}]                                                                         # | o_º
     [[ $S -lt 0 ]] && S=0                                                                               # | o_º
