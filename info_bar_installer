@@ -13,7 +13,7 @@ function face { printf "${paint[yelow]}${faces[$((RANDOM % $facesN))]}${paint[no
 function info {                                                                                       # | o_º
     [[ -d .git ]] && {                                                                                # | O_o
         git_clr=('GIT' $(git -c color.ui=always status -sb))                                          # | o_O
-        git_tst="GIT $(git status -sb)"                                                               # | o_o
+        git_tst="GIT $(git status -sb) "                                                              # | o_o
     }                                                                                                 # | o_º
     D=$(printf "%(%a %d %b %T)T")                                         # Date & time               # | O_o
     T=" O_o $PWD $git_tst $D o_O "                                        # Test string               # | o_o
