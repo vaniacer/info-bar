@@ -18,7 +18,6 @@ function info {                                                                 
     T=$(printf " O_o $git_tst  $D o_O ")                                                                # | o_o
     S=$[$COLUMNS-${#PWD}-${#T}]                                                                         # | o_º
     [[ $S -lt 0 ]] && S=0                                                                               # | o_º
-                                                                                                        # | º_O
             #-------+--------------------+------+-------------+------------+-------+                    # | o_o
             #  O_o  |  Working directory |Spaces| Git  status | Date & time|  o_O  |                    # | o_O
     line    #-------+--------------------+------+-------------+------------+-------+                    # | O_O
