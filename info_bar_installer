@@ -12,7 +12,7 @@ declare -A paint=([bold]='\e[1m'   [dim]='\e[2m' [normal]='\e[0m'   # Effects   
 function face { printf "${paint[yelow]}${faces[$((RANDOM % $facesN))]}${paint[normal]}"; }            # | º_º
 function info {                                                                                       # | o_º
     [[ -d .git ]] && {                                                                                # | O_o
-        git_clr=('GIT' $(git -c color.ui=always status -sb) '')                                       # | o_O
+        git_clr=('GIT' $(git -c color.ui=always status -sb) ' ')                                      # | o_O
         git_tst="GIT $(git status -sb) "                                                              # | o_o
     }                                                                                                 # | o_º
     D=$(printf "%(%a %d %b %T)T")                                         # Date & time               # | O_o
@@ -21,10 +21,10 @@ function info {                                                                 
     date="${paint[dim]}$D${paint[normal]}"                                # Date & time               # | O_o
     home="${paint[bold]}${paint[blue]}$PWD${paint[normal]}"               # Home dir info             # | o_o
     line="${paint[green]}$(printf %.s- `seq $COLUMNS`)${paint[normal]}\n" # Create lines              # | O_O
-           #------+-----+-------+------+------------+-----+------+------+                             # | o_o
-           # Line | O_o |homedir|Spaces| Git status |Date |  o_O | Line |                             # | o_O
-           #------+-----+-------+------+------------+-----+------+------+                             # | O_O
-    printf "$line $(face) $home %${S}s ${git_clr[*]}$date $(face) $line"                              # | O_o
+           #------+-----+-------+------+------------+-----+-----+--------+                            # | o_o
+           # Line | O_o |homedir|Spaces| Git status |Date | o_O |   Line |                            # | o_O
+           #------+-----+-------+------+------------+-----+-----+--------+                            # | O_O
+    printf "$line $(face) $home %${S}s ${git_clr[*]}$date $(face) \n$line"                            # | O_o
 }                                                                                                     # | O_o
                                                                                                       # | o_o
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
