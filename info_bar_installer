@@ -4,33 +4,33 @@ case $1 in '-remove' | '-r') sed -i '/[oOº]_[oOº]/d' ~/.bashrc; exit 0;; esac
 
 sed -e "s|Z|'|g" <<< '
 
-#---------------------------------------------{ Info bar }------------------------------------------------+ o_o
-faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]}                                        # | o_º
-                                                                                                        # | º_O
-function line { printf "\e[32m"; printf %.s- $(seq $COLUMNS); printf "\e[0m"; }                         # | O_o
-function face { printf "\e[33m${faces[$((RANDOM     %    ${facesN}))]}\e[0m"; }                         # | º_º
-function info {                                                                                         # | o_º
-    [[ -d .git ]] && {                                                                                  # | O_o
-        git_clr=('GIT' $(git -c color.ui=always status -sb) '')                                         # | o_O
-        git_tst="GIT $(git status -sb) "                                                                # | o_o
-    }                                                                                                   # | o_º
-    D=$(printf "%(%a %d %b %T)T")                                                                       # | O_o
-    T=$(printf " O_o $git_tst  $D o_O ")                                                                # | o_o
-    S=$[$COLUMNS-${#PWD}-${#T}]                                                                         # | o_º
-    [[ $S -lt 0 ]] && S=0                                                                               # | o_º
-            #-------+--------------------+------+-------------+------------+-------+                    # | o_o
-            #  O_o  |  Working directory |Spaces| Git  status | Date & time|  o_O  |                    # | o_O
-    line    #-------+--------------------+------+-------------+------------+-------+                    # | O_O
-    printf " $(face) \e[1m\e[94m$PWD\e[0m %${S}s ${git_clr[*]}\e[2m$D\e[0m $(face) \n"                  # | O_o
-    line                                                                                                # | º_O
-}                                                                                                       # | O_o
-                                                                                                        # | o_o
-PS1=Z${debian_chroot:+($debian_chroot)}\n$(info)\n$ Z                                                   # | º_O
-                                                                                                        # | o_º
-case "$TERM" in xterm*|rxvt*)                                                                           # | O_o
-                                                                                                        # | º_º
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} ${faces[$((RANDOM % ${#faces[@]}))]} \w\a\]$PS1";;   # | O_º
-                                                                                                        # | o_o
-esac                                                                                                    # | o_O
-#---------------------------------------------------------------------------------------------------------+ º_O
+#---------------------------------------------{ Info bar }----------------------------------------------+ o_o
+faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]}    # Face types                      # | o_º
+declare -A paint=([bold]='\e[1m'   [dim]='\e[2m' [normal]='\e[0m'   # Effects                         # | o_o
+                 [yelow]='\e[33m' [blue]='\e[94m' [green]='\e[32m') # Colors                          # | O_O
+                                                                                                      # | º_O
+function face { printf "${paint[yelow]}${faces[$((RANDOM % $facesN))]}${paint[normal]}"; }            # | º_º
+function info {                                                                                       # | o_º
+    [[ -d .git ]] && {                                                                                # | O_o
+        git_clr=('GIT' $(git -c color.ui=always status -sb) '')                                       # | o_O
+        git_tst="GIT $(git status -sb) "                                                              # | o_o
+    }                                                                                                 # | o_º
+    D=$(printf "%(%a %d %b %T)T")                      # Date & time                                  # | O_o
+    T=" O_o $git_tst  $D o_O "                         # Test string                                  # | o_o
+    S=$[$COLUMNS-${#PWD}-${#T}]; [[ $S -lt 0 ]] && S=0 # Count spaces                                 # | o_º
+    date="${paint[dim]}$D${paint[normal]}"                                # Date & time               # | O_o
+    home="${paint[bold]}${paint[blue]}$PWD${paint[normal]}"               # Home dir info             # | o_o
+    line="${paint[green]}$(printf %.s- `seq $COLUMNS`)${paint[normal]}\n" # Create lines              # | O_O
+           #------+-----+-------+------+------------+-----+------+------+                             # | o_o
+           # Line | O_o |homedir|Spaces| Git status |Date |  o_O | Line |                             # | o_O
+           #------+-----+-------+------+------------+-----+------+------+                             # | O_O
+    printf "$line $(face) $home %${S}s ${git_clr[*]}$date $(face) $line"                              # | O_o
+}                                                                                                     # | O_o
+                                                                                                      # | o_o
+PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
+                                                                                                      # | o_º
+case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} ${faces[$((RANDOM % ${#faces[@]}))]} \w\a\]$PS1";; # | O_º
+esac                                                                                                  # | o_O
+#-------------------------------------------------------------------------------------------------------+ O_o
 ' >> ~/.bashrc
