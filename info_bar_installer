@@ -6,17 +6,14 @@ cat >> ~/.bashrc << 'EOF'
 
 #---------------------------------------------{ Info bar }----------------------------------------------+ o_o
 faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]} # Face types                         # | o_º
-declare -A paint=(  #________                                                                         # | O_O
-   [green]='\e[32m' #                                                                                 # | o_o
-   [yelow]='\e[33m' # colors                                                                          # | O_o
-    [blue]='\e[94m' #________                                                                         # | º_O
-    [norm]='\e[0m'  #                                                                                 # | o_o
-    [bold]='\e[1m'  # effects                                                                         # | O_o
-     [dim]='\e[2m') #________                                                                         # | o_º
-                                                                                                      # | º_O
+declare -A paint=( # Colors     |   Effects                                                           # | O_O
+                [green]='\e[32m' [norm]='\e[0m'                                                       # | O_o
+                [yelow]='\e[33m' [bold]='\e[1m'                                                       # | O_o
+                 [blue]='\e[94m'  [dim]='\e[2m')                                                      # | o_o
+#-------------------------------------------------------------------------------------------------------+ º_O
 face() { printf "${paint[yelow]}${faces[$((RANDOM % $facesN))]}${paint[norm]}"; } # Random face       # | º_º
 info() {                                                                                              # | o_º
-    [[ -d .git ]] && {                                                                                # | O_o
+    [[ -d .git ]] && { # If in git indexed folder adding git status to info bar output                # | O_o
         git_clr=('GIT' $(git -c color.ui=always status -sb)) # Colored output 4 info                  # | o_O
         git_tst=('GIT' $(git                    status -sb)) # Simple  output 4 test                  # | o_o
     }                                                                                                 # | o_º
@@ -31,7 +28,7 @@ info() {                                                                        
            #------+-----+-------+------+------------+-----+-------+--------+                          # | O_O
     printf "$line $(face) $home %${S}s ${git_clr[*]} $date $(face) \n$line" # Final info string       # | O_o
 }                                                                                                     # | O_o
-                                                                                                      # | o_o
+#-------------------------------------------------------------------------------------------------------+ o_o
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
                                                                                                       # | o_º
 case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
