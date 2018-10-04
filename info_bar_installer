@@ -3,7 +3,6 @@
 case $1 in '--remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
 
 cat >> ~/.bashrc << 'EOF'
-
 #---------------------------------------------{ Info bar }----------------------------------------------+ o_o
 faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]} # Face types                         # | o_º
 declare -A paint=( # Colors     |   Effects                                                           # | O_O
