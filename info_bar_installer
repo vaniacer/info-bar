@@ -1,6 +1,6 @@
 #!/bin/bash
 
-case $1 in '-remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
+case $1 in '--remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
 
 cat >> ~/.bashrc << 'EOF'
 
