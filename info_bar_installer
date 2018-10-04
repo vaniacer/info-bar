@@ -29,7 +29,7 @@ info() {                                                                        
            #------+-----+-------+------+------------+-----+-------+--------+                          # | o_o
            # Line | O_o |homedir|Spaces| Git status | Date|  o_O  |  Line  |                          # | o_O
            #------+-----+-------+------+------------+-----+-------+--------+                          # | O_O
-    printf "$line $(face) $home %${S}s ${git_clr[*]} $date $(face) \n$line"                           # | O_o
+    printf "$line $(face) $home %${S}s ${git_clr[*]} $date $(face) \n$line" # Final info string       # | O_o
 }                                                                                                     # | O_o
                                                                                                       # | o_o
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
