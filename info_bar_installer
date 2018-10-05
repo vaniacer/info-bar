@@ -16,13 +16,13 @@ info() {                                                                        
         git_clr=('GIT' $(git -c color.ui=always status -sb)) # Colored output 4 info                  # | o_O
         git_tst=('GIT' $(git                    status -sb)) # Simple  output 4 test                  # | o_o
     }                                                                                                 # | o_º
-    printf -v line "%${COLUMNS}s"                            # Set border length                      # | O_o
+    printf -v line "%${COLUMNS}s"                            # Fill line var with spaces              # | O_o
+    line="${paint[green]}${line// /-}${paint[norm]}\n"       # Add color and change ' ' to '-'        # | O_o
     date=$(printf "%(%a %d %b %T)T")                         # Date & time 4 test                     # | O_o
     test=" O_o $PWD  ${git_tst[*]} $date o_O "               # Test string                            # | o_o
     step=$[$COLUMNS-${#test}]; [[ $step -lt 0 ]] && step=0   # Count spaces                           # | o_º
-    line="${paint[green]}${line// /-}${paint[norm]}\n"       # Create lines                           # | O_o
     home="${paint[bold]}${paint[blue]}$PWD${paint[norm]}"    # Home dir info                          # | o_o
-    date="${paint[dim]}$date${paint[norm]}"                  # Colored date & time                    # | O_o
+    date="${paint[dim]}$date${paint[norm]}"                  # Add color to date & time               # | O_o
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | o_o
            # Line | O_o |homedir| Spaces | Git  status | Date|  o_O  |  Line  |                       # | o_O
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | O_O
