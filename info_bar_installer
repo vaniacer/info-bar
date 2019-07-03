@@ -40,7 +40,7 @@ info() {                                                                        
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
                                                                                                       # | o_º
 case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} ${faces[$((RANDOM % ${#faces[@]}))]} \w\a\]$PS1";; # | O_º
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} ${faces[$[RANDOM % $facesN]]} \w\a\]$PS1";;        # | O_º
 esac                                                                                                  # | o_O
 #-------------------------------------------------------------------------------------------------------+ O_o
 EOF
