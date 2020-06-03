@@ -4,7 +4,6 @@ case $1 in '--remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
 
 cat >> ~/.bashrc << 'EOF'
 #---------------------------------------------{ Info bar }----------------------------------------------+ o_o
-<<<<<<< HEAD
 eyes=(O o ∘ ◦ ⍤ ⍥) en=${#eyes[@]} mouth='_'                                                           # | o_º
 RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m'               # | o_o #-------------------------------------------------------------------------------------------------------+ º_O
 face () { # gen random face                                                                           # | O_o
@@ -29,48 +28,11 @@ info () { error=$?                                                              
            # Line | O_o |homedir| Spaces | Git  status | Date|  o_O  |  Line  |                       # | o_O
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | O_O
     printf "$line $(face) $home %${step}s ${git_clr[*]} $date $(face) \n$line" # Final info string    # | O_o
-=======
-line_simbol='-'                                                                                       # | O_O
-faces=(O_o o_O o_o O_O º_o º_O O_º o_º º_º); facesN=${#faces[@]} # Face types                         # | o_º
-declare -A paint=( # Colors     |   Effects                                                           # | O_O
-                [green]='\e[32m' [norm]='\e[0m'                                                       # | O_o
-                [yelow]='\e[33m' [bold]='\e[1m'                                                       # | O_o
-                 [blue]='\e[94m'  [dim]='\e[2m')                                                      # | o_o
-#-------------------------------------------------------------------------------------------------------+ º_O
-face() { printf "${paint[yelow]}${faces[$((RANDOM % $facesN))]}${paint[norm]}"; } # Random face       # | º_º
-info() {                                                                                              # | o_º
-    [[ -d .git ]] && {  # If in git project folder add git status to info bar output                  # | O_o
-        git_clr=('GIT' $(git -c color.ui=always status -sb)) # Colored output 4 info                  # | o_O
-        git_tst=('GIT' $(git                    status -sb)) # Simple  output 4 test                  # | o_o
-    }                                                                                                 # | o_o
-                                                                                                      # | o_O
-    nametest="{ $HOSTNAME }"                                                                          # | O_o
-    sign="{ ${paint[norm]}$HOSTNAME${paint[green]} }"                                                 # | o_o
-    printf -v line  "%${COLUMNS}s"; line=${line// /$line_simbol}                                      # | O_o
-    printf -v line2 "%$[($COLUMNS-${#nametest})/2]s"; line2=${line2// /$line_simbol}                  # | O_O
-    signtest="$line2{ $HOSTNAME }$line2"; [[ ${#signtest} -lt $COLUMNS ]] && sign+=$line_simbol       # | o_o
-                                                                                                      # | o_o
-    D=$(printf "%(%a %d %b %T)T")                             # Date & time                           # | O_o
-    T=" O_o $PWD  ${git_tst[*]} $D o_O "                      # Test string                           # | o_o
-    S=$[$COLUMNS-${#T}]; [[ $S -lt 0 ]] && S=0                # Count spaces                          # | o_º
-    date="${paint[dim]}$D${paint[norm]}"                      # Date & time                           # | O_o
-    line="${paint[green]}$line${paint[norm]}\n"               # Create line                           # | O_o
-    home="${paint[bold]}${paint[blue]}$PWD${paint[norm]}"     # Home dir info                         # | o_o
-    sign="${paint[green]}$line2$sign$line2${paint[norm]}\n"   # Hostname sign                         # | O_o
-           #------+-----+-------+------+------------+-----+-------+--------+                          # | o_o
-           # Line | O_o |homedir|Spaces| Git status | Date|  o_O  |  Line  |                          # | o_O
-           #------+-----+-------+------+------------+-----+-------+--------+                          # | O_O
-    printf "$sign $(face) $home %${S}s ${git_clr[*]} $date $(face) \n$line" # Final info string       # | O_o
->>>>>>> 57a6bd671a5333c114e53be3f7d3fa9cd53c61ac
 }                                                                                                     # | O_o
 #-------------------------------------------------------------------------------------------------------+ o_o
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
 case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
-<<<<<<< HEAD
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)} $(face 1) \w\a\]$PS1";;                            # | O_º
-=======
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} ${faces[$[RANDOM % $facesN]]} \w\a\]$PS1";;        # | O_º
->>>>>>> 57a6bd671a5333c114e53be3f7d3fa9cd53c61ac
 esac                                                                                                  # | o_O
 #-------------------------------------------------------------------------------------------------------+ O_o
 EOF
