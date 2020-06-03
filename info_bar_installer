@@ -5,11 +5,12 @@ case $1 in '--remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
 cat >> ~/.bashrc << 'EOF'
 #---------------------------------------------{ Info bar }----------------------------------------------+ o_o
 eyes=(O o ∘ ◦ ⍤ ⍥) en=${#eyes[@]} mouth='_'                                                           # | o_º
-RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m'               # | o_o #-------------------------------------------------------------------------------------------------------+ º_O
+RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m'               # | o_o
+#-------------------------------------------------------------------------------------------------------+ º_O
 face () { # gen random face                                                                           # | O_o
     [[ $error -gt 0 ]] && ecolor=$RED || ecolor=$YLW                                                  # | o_o
     if [[ $1 ]]; then printf "${eyes[$[RANDOM%en]]}$mouth${eyes[$[RANDOM%en]]}"                       # | o_º
-                 else printf "$ecolor${eyes[$[RANDOM%en]]}$YLW$mouth$ecolor${eyes[$[RANDOM%en]]}$DEF" # | o_o 
+                 else printf "$ecolor${eyes[$[RANDOM%en]]}$YLW$mouth$ecolor${eyes[$[RANDOM%en]]}$DEF" # | o_o
     fi                                                                                                # | o_O
 }                                                                                                     # | º_º
 info () { error=$?                                                                                    # | o_º
