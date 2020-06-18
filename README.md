@@ -3,4 +3,4 @@
 
 CLI info bar with funny faces O_o </br>
 If last command failed, eyes will turn red.
-![screeenshot](https://user-images.githubusercontent.com/18072680/85025458-19807280-b180-11ea-81b8-5a6d87e1bfd6.png)
+![screeenshot](https://user-images.githubusercontent.com/18072680/85026540-7a5c7a80-b181-11ea-8117-e14068b1eb91.png)
