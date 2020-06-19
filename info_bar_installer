@@ -4,8 +4,8 @@ case $1 in '--remove' | '-r') sed '/[oOº]_[oOº]/d' -i ~/.bashrc; exit 0;; esac
 
 cat >> ~/.bashrc << 'EOF'
 #---------------------------------------------{ Info bar }----------------------------------------------+ o_o
-eyes=(O o ∘ ◦ ⍤ ⍥) en=${#eyes[@]} mouth='_'                                                           # | o_º
-RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m'               # | o_o
+eyes=(O o ∘ ◦ ⍤ ⍥) en=${#eyes[@]} mouth='_' linesymbol='-'                                            # | o_º
+RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m' MGN='\e[35m'  # | o_o
 #-------------------------------------------------------------------------------------------------------+ º_O
 face () { # gen random face                                                                           # | O_o
     [[ $error -gt 0 ]] && ecolor=$RED || ecolor=$YLW                                                  # | o_o
@@ -18,17 +18,22 @@ info () { error=$?                                                              
         git_clr=('GIT' $(git -c color.ui=always status -sb)) # Colored output 4 info                  # | o_O
         git_tst=('GIT' $(git                    status -sb)) # Simple  output 4 test                  # | o_o
     }                                                                                                 # | o_º
+    toptest="{ $HOSTNAME }" toptest=${#toptest}                                                       # | o_o
+    top=$[COLUMNS-toptest]  top=$[top/2] toptest=$[top*2+toptest]                                     # | O_o
+    ((toptest<COLUMNS))  && insert="$linesymbol" || insert=                                           # | O_o
+    printf -v name "$GRN%${top}s{_S_$DEF$BLD${HOSTNAME}_S_$DEF$GRN}%${top}s$insert$DEF"               # | o_o
     printf -v line "%${COLUMNS}s"                            # Set border length                      # | O_o
-    date=$(printf "%(%a %d %b %T)T")                         # Date & time 4 test                     # | O_o
+    printf -v date "%(%a %d %b %T)T"                         # Date & time 4 test                     # | O_o
+    name="${name// /-}\n" name="${name//_S_/ }"              # Top line with hostname                 # | º_O
     test=" O_o $PWD  ${git_tst[*]} $date o_O "               # Test string                            # | o_o
     step=$[$COLUMNS-${#test}]; [[ $step -lt 0 ]] && step=0   # Count spaces                           # | o_º
-    line="$GRN${line// /-}$DEF\n"                            # Create lines                           # | O_o
+    line="$GRN${line// /$linesymbol}$DEF\n"                  # Create lines                           # | O_o
     home="$BLD$BLU$PWD$DEF"                                  # Home dir info                          # | o_o
     date="$DIM$date$DEF"                                     # Colored date & time                    # | O_o
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | o_o
            # Line | O_o |homedir| Spaces | Git  status | Date|  o_O  |  Line  |                       # | o_O
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | O_O
-    printf "$line $(face) $home %${step}s ${git_clr[*]} $date $(face) \n$line" # Final info string    # | O_o
+    printf "$name $(face) $home %${step}s ${git_clr[*]} $date $(face) \n$line" # Final info string    # | O_o
 }                                                                                                     # | O_o
 #-------------------------------------------------------------------------------------------------------+ o_o
 PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
