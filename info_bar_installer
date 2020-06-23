@@ -37,9 +37,6 @@ info () { error=$?                                                              
     printf "$name $(face) $home %${step}s ${git_clr[*]} $date $(face) \n$line" # Final info string    # | O_o
 }                                                                                                     # | O_o
 #-------------------------------------------------------------------------------------------------------+ o_o
-PS1='\n$(info)\n$ '                                                                                   # | º_O
-case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
-    PS1="\[\e]0;$(face 1) \w\a\]$PS1";;                                                               # | O_º
-esac                                                                                                  # | o_O
+PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$(face 1) \w\a\]$PS1";; esac           # | O_º
 #-------------------------------------------------------------------------------------------------------+ O_o
 EOF
