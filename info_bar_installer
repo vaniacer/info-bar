@@ -14,6 +14,7 @@ face () { # gen random face                                                     
     fi                                                                                                # | o_O
 }                                                                                                     # | º_º
 info () { error=$?                                                                                    # | o_º
+    [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt= # If in chroot                           # | o_o
     [[ -d .git ]] && {  # If in git project folder add git status to info bar output                  # | O_o
         git_clr=('GIT' $(git -c color.ui=always status -sb)) # Colored output 4 info                  # | o_O
         git_tst=('GIT' $(git                    status -sb)) # Simple  output 4 test                  # | o_o
@@ -25,10 +26,10 @@ info () { error=$?                                                              
     printf -v line "%${COLUMNS}s"                            # Set border length                      # | O_o
     printf -v date "%(%a %d %b %T)T"                         # Date & time 4 test                     # | O_o
     name="${name// /-}\n" name="${name//_S_/ }"              # Top line with hostname                 # | º_O
-    test=" O_o $PWD  ${git_tst[*]} $date o_O "               # Test string                            # | o_o
+    test=" O_o $chrt$PWD  ${git_tst[*]} $date o_O "          # Test string                            # | o_o
     step=$[$COLUMNS-${#test}]; [[ $step -lt 0 ]] && step=0   # Count spaces                           # | o_º
     line="$GRN${line// /$linesymbol}$DEF\n"                  # Create lines                           # | O_o
-    home="$BLD$BLU$PWD$DEF"                                  # Home dir info                          # | o_o
+    home="$DEF$chrt$BLD$BLU$PWD$DEF"                         # Home dir info                          # | o_o
     date="$DIM$date$DEF"                                     # Colored date & time                    # | O_o
            #------+-----+-------+--------+-------------+-----+-------+--------+                       # | o_o
            # Line | O_o |homedir| Spaces | Git  status | Date|  o_O  |  Line  |                       # | o_O
@@ -36,9 +37,9 @@ info () { error=$?                                                              
     printf "$name $(face) $home %${step}s ${git_clr[*]} $date $(face) \n$line" # Final info string    # | O_o
 }                                                                                                     # | O_o
 #-------------------------------------------------------------------------------------------------------+ o_o
-PS1='${debian_chroot:+($debian_chroot)}\n$(info)\n$ '                                                 # | º_O
+PS1='\n$(info)\n$ '                                                                                   # | º_O
 case "$TERM" in xterm*|rxvt*)                                                                         # | O_o
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)} $(face 1) \w\a\]$PS1";;                            # | O_º
+    PS1="\[\e]0;$(face 1) \w\a\]$PS1";;                                                               # | O_º
 esac                                                                                                  # | o_O
 #-------------------------------------------------------------------------------------------------------+ O_o
 EOF
