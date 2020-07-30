@@ -26,11 +26,11 @@ info () { error=$? git_tst= git_clr=
          git_clr=(GIT $(git -c color.ui=always status -sb)) git_clr="${git_clr[*]} " # Colored output
     }
     [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt=  # If in chroot
-    name_lenght="{ $HOSTNAME$chrt }"
-    name_lenght=${#name_lenght}
+    name_length="{ $HOSTNAME$chrt }"
+    name_length=${#name_length}
     face_tst='O_o  o_O'
-    top_line_left=$[(COLUMNS-name_lenght)/2]
-    top_line_right=$[COLUMNS-(top_line_left+name_lenght)]
+    top_line_left=$[(COLUMNS-name_length)/2]
+    top_line_right=$[COLUMNS-(top_line_left+name_length)]
     printf -v top_line "%${top_line_left}s{_S_$DEF$BLD$HOSTNAME$chrt${DEF}_S_$GRN}%${top_line_right}s"
     printf -v bot_line "%${COLUMNS}s"
     printf -v date  "%(%a %d %b %T)T"
