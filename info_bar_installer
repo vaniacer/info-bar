@@ -22,8 +22,8 @@ face () { # gen random face
 }
 info () { error=$? git_tst= git_clr=
     [[ -d .git ]] && {
-         git_tst=(GIT $(git status -sb))                    git_tst="${git_tst[*]} " # Test output
-         git_clr=(GIT $(git -c color.ui=always status -sb)) git_clr="${git_clr[*]} " # Colored output
+         git_tst=($(git -c color.ui=never  status -sb)) git_tst="GIT ${git_tst[*]} " # Test output
+         git_clr=($(git -c color.ui=always status -sb)) git_clr="GIT ${git_clr[*]} " # Colored output
     }
     [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt=  # If in chroot
     name_length="{ $HOSTNAME$chrt }"
