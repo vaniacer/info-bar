@@ -9,41 +9,56 @@ grep -q "$name" ~/.bashrc && { echo 'Already installed!)'; exit 1; }
 cat  >> ~/.bashrc <<< ". ~/$name"
 cat  >  ~/$name   <<  'EOF'
 #---------------------------------------------{ Info bar }---------------------------------------------
-eyes=(O o ∘ ◦ ⍤ ⍥) en=${#eyes[@]} mouth='_' linesymbol='-'
+boobs=(
+    '(* )  ( *)'
+     '(* )( *)'
+     '( *||* )'
+      '(*||*)'
+    '( *)  (* )'
+)
+bn=${#boobs[@]} linesymbol='-'
 #-----------+------------+------------+--------{ Colors }-------+-----------+-----------+-------------+
 #    red    |    green   |   yelow    |    blue    |   magenta  |  default  |  bolded   |    dimed    |
 #-----------+------------+------------+------------+------------+-----------+-----------+-------------+
 RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' MGN='\e[35m' DEF='\e[0m' BLD='\e[1m' DIM='\e[2m' #|
 #-----------+------------+------------+------------+------------+-----------+-----------+-------------+
-face () { # gen random face
-    [[ $error -gt 0 ]] && ecolor=$RED || ecolor=$YLW
-    [[ $1 ]] && printf "${eyes[$[RANDOM%en]]}$mouth${eyes[$[RANDOM%en]]}" \
-             || printf "$ecolor${eyes[$[RANDOM%en]]}$YLW$mouth$ecolor${eyes[$[RANDOM%en]]}$DEF"
-}
+boob () { printf "${boobs[$[RANDOM%bn]]}"; }
 info () { error=$? git_tst= git_clr=
     [[ -d .git ]] && {
-         git_tst=($(git -c color.ui=never  status -sb)) git_tst="GIT ${git_tst[*]} " # Test output
-         git_clr=($(git -c color.ui=always status -sb)) git_clr="GIT ${git_clr[*]} " # Colored output
+         git_tst=($(git -c color.ui=never  status -sb)) git_tst="GIT ${git_tst[*]}" # Test output
+         git_clr=($(git -c color.ui=always status -sb)) git_clr="GIT ${git_clr[*]}" # Colored output
     }
     [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt=  # If in chroot
-    name_length="{ $HOSTNAME$chrt }"
-    name_length=${#name_length}
-    face_tst='O_o  o_O'
-    top_line_left=$[(COLUMNS-name_length)/2]
-    top_line_right=$[COLUMNS-(top_line_left+name_length)]
-    printf -v top_line "%${top_line_left}s{_S_$DEF$BLD$HOSTNAME$chrt${DEF}_S_$GRN}%${top_line_right}s"
-    printf -v bot_line "%${COLUMNS}s"
+    (( error > 0 )) && ncolor=$RED || ncolor=$YLW
+    name="$DEF$DIM$USER$RED@$DEF$DIM$HOSTNAME$chrt"
+    boob="$(boob)"
+    name_length="$USER@$HOSTNAME$chrt }"
+    boob_length="{ $boob }"
     printf -v date  "%(%a %d %b %T)T"
+    date_length="{ $date"
+    top_line_left=$[(COLUMNS-${#boob_length})/2]
+    top_line_left=$[top_line_left-${#name_length}]
+    top_line_right=$[COLUMNS-(top_line_left+${#name_length}+${#boob_length})]
+    top_line_right=$[top_line_right-${#date_length}]
+    boob=${boob// /_S_}
+    boob=${boob//\*/$ncolor\*$DEF$BLD}
+    printf -v top_line "${name}_S_$DEF$GRN}%${top_line_left}s{_S_$DEF$BLD$boob${DEF}_S_$GRN}%${top_line_right}s{_S_$DEF$DIM$date$DEF"
+    printf -v bot_line "%${COLUMNS}s"
     top_line=${top_line// /-}
-    top_line=$GRN${top_line//_S_/ }$DEF
+    top_line=${top_line//_S_/ }$DEF
     bot_line=$GRN${bot_line// /-}$DEF
-    spaces=$[COLUMNS-${#date}-${#PWD}-${#git_tst}-${#face_tst}]; ((spaces<0)) && spaces=1
-            #----------+-------+----------------+--------+-----------+------+-----+-------------+
-            # Top Line |  O_o  |   Current dir  | Spaces | GitStatus | Date | o_O | Bottom Line |
-            #----------+-------+----------------+--------+-----------+------+-----+-------------+
-    printf "$top_line\n$(face) $BLD$BLU$PWD$DEF%${spaces}s$git_clr$DIM$date $(face)\n$bot_line"
+    spaces=$[COLUMNS-${#PWD}-${#git_tst}]; ((spaces<0)) && spaces=1
+           #----------+-----------------+--------+---------+-------------+
+           # Top Line |   Current dir   | Spaces |GitStatus| Bottom Line |
+           #----------+-----------------+--------+---------+-------------+
+    printf "$top_line\n$BLD$BLU$PWD$DEF%${spaces}s$git_clr\n$bot_line"
 }
 #------------------------------------------------------------------------------------------------------
-PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$(face 1) \w\a\]$PS1";; esac
+PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$boob \w\a\]$PS1";; esac
 #------------------------------------------------------------------------------------------------------
 EOF
+# new layout scheme 'boobs'
+#user@hostname }-----------------------------{ (* )( *) }-------------------------{ Пн 28 сен 14:22:19
+#/home/vaniac/ower                                                                                    
+#-----------------------------------------------------------------------------------------------------
+
