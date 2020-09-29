@@ -1,6 +1,6 @@
 # info-bar
-![screeenshot](https://user-images.githubusercontent.com/18072680/85110454-9dd40380-b21b-11ea-8c17-02f1bd7221ef.png)
-CLI info bar with funny faces O_o If last command failed, eyes will turn red.
-![screeenshot](https://user-images.githubusercontent.com/18072680/85110450-9ca2d680-b21b-11ea-9a9a-3b9e7f9b25b1.png)
+![screeenshot](https://user-images.githubusercontent.com/18072680/94531077-adb0aa00-0244-11eb-87ec-2ddc887c5bcb.png)
+CLI info bar with boobs ( *) (* ) If last command failed, nipps will turn red.
+![screeenshot](https://user-images.githubusercontent.com/18072680/94531040-a093bb00-0244-11eb-854e-a4c6d9666236.png)
 
 [![paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/sshto?locale.x=en_US)  Don't hold yourself, buy me a beer)
