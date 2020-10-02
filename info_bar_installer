@@ -54,7 +54,7 @@ info () { error=$? git_tst= git_clr=
     printf "$top_line\n$BLD$BLU$PWD$DEF%${spaces}s$git_clr\n$bot_line"
 }
 #------------------------------------------------------------------------------------------------------
-PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$(boob) \w\a\]$PS1";; esac
+PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$(boob) \h\w\a\]$PS1";; esac
 #------------------------------------------------------------------------------------------------------
 EOF
 # new layout scheme 'boobs'
