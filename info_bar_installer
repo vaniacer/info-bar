@@ -30,9 +30,9 @@ info () { error=$? git_tst= git_clr=
     }
     [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt=  # If in chroot
     (( error > 0 )) && ncolor=$RED || ncolor=$YLW
-    name="$DEF$DIM$USER$RED@$DEF$DIM$HOSTNAME$chrt"
+    name="$DEF$USER ${DIM}on $DEF$HOSTNAME$chrt $DEF$GRN}"
     boob="$(boob)"
-    name_length="$USER@$HOSTNAME$chrt }"
+    name_length="$USER on $HOSTNAME$chrt }"
     boob_length="{ $boob }"
     printf -v date  "%(%a %d %b %T)T"
     date_length="{ $date"
@@ -40,13 +40,17 @@ info () { error=$? git_tst= git_clr=
     top_line_left=$[top_line_left-${#name_length}]
     top_line_right=$[COLUMNS-(top_line_left+${#name_length}+${#boob_length})]
     top_line_right=$[top_line_right-${#date_length}]
-    boob=${boob// /_S_}
     boob=${boob//\*/$ncolor\*$DEF$BLD}
-    printf -v top_line "${name}_S_$DEF$GRN}%${top_line_left}s{_S_$DEF$BLD$boob${DEF}_S_$GRN}%${top_line_right}s{_S_$DEF$DIM$date$DEF"
+    boob="{ $DEF$BLD$boob${DEF} $GRN}"
+    date="{ $DEF$DIM$date$DEF"
+    printf -v top_line "_NAME_%${top_line_left}s_BOOB_%${top_line_right}s_DATE_"
     printf -v bot_line "%${COLUMNS}s"
     top_line=${top_line// /-}
-    top_line=${top_line//_S_/ }$DEF
+    top_line=${top_line//_NAME_/"$name"}
+    top_line=${top_line//_BOOB_/"$boob"}
+    top_line=${top_line//_DATE_/"$date"}$DEF
     bot_line=$GRN${bot_line// /-}$DEF
+
     spaces=$[COLUMNS-${#PWD}-${#git_tst}]; ((spaces<0)) && spaces=1
            #----------+-----------------+--------+---------+-------------+
            # Top Line |   Current dir   | Spaces |GitStatus| Bottom Line |
@@ -58,7 +62,7 @@ PS1='\n$(info)\n$ '; case "$TERM" in xterm*|rxvt*) PS1="\[\e]0;$(boob) \h\w\a\]$
 #------------------------------------------------------------------------------------------------------
 EOF
 # new layout scheme 'boobs'
-#user@hostname }-----------------------------{ (* )( *) }--------------------------{ Пн 28 сен 14:22:19
+#user on hostname }----------------------------{ (* )( *) }------------------------{ Пн 28 сен 14:22:19
 #/home/vaniac/ower                                                                                     
 #------------------------------------------------------------------------------------------------------
 
