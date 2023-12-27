@@ -3,6 +3,7 @@
 CLI info bar with funny faces O_o If last command failed, eyes will turn red.
 ![screeenshot](https://user-images.githubusercontent.com/18072680/85110450-9ca2d680-b21b-11ea-9a9a-3b9e7f9b25b1.png)
 
+<a href="https://t.me/sshtobash"><img src="https://telegram.org/img/website_icon.svg" width="21"></a>
 [![Twitter Follow](https://img.shields.io/twitter/follow/Vaniacer?style=social)](https://twitter.com/Vaniacer)
 [![paypal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/sshto?locale.x=en_US) <sup>Don't hold yourself, buy me a beer)</sup>
 
