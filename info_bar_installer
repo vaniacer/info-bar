@@ -16,7 +16,7 @@ boobs=(
       '(*||*)'
     '( *)  (* )'
 )
-bn=${#boobs[@]} linesymbol='-'
+bn=${#boobs[@]} linesymbol='-' git_sts_depth=50
 #-----------+------------+------------+--------{ Colors }-------+-----------+-----------+-------------+
 #    red    |    green   |   yelow    |    blue    |   magenta  |  default  |  bolded   |    dimed    |
 #-----------+------------+------------+------------+------------+-----------+-----------+-------------+
@@ -25,8 +25,8 @@ RED='\e[31m' GRN='\e[32m' YLW='\e[33m' BLU='\e[34m' MGN='\e[35m' DEF='\e[0m' BLD
 boob () { printf "${boobs[$[RANDOM%bn]]}"; }
 info () { error=$? git_tst= git_clr=
     [[ -d .git ]] && {
-         git_tst=($(git -c color.ui=never  status -sb)) git_tst="GIT ${git_tst[*]}" # Test output
-         git_clr=($(git -c color.ui=always status -sb)) git_clr="GIT ${git_clr[*]}" # Colored output
+         git_tst=($(git -c color.ui=never  status -sb | head -$git_sts_depth)) git_tst="GIT ${git_tst[*]}" #Test output
+         git_clr=($(git -c color.ui=always status -sb | head -$git_sts_depth)) git_clr="GIT ${git_clr[*]}" #Colored output
     }
     [[ $debian_chroot ]] && chrt="($debian_chroot)" || chrt=  # If in chroot
     (( error > 0 )) && ncolor=$RED || ncolor=$YLW
